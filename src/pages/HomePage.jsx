@@ -1,10 +1,8 @@
 import React from 'react';
 import "./styles/Styles.css";
 import { Box } from '@mui/material';
-import UsersCard from '../assets/UsersCard.jpg';
-// import UsersCard from '../../docs/assets/CountriesCard-9I-Mksbc.jpg';
-import CountriesCard from '../assets/CountriesCard.jpg';
-// import CountriesCard from '../../docs/assets/UsersCard-DDBMxpC5.jpg';
+import UsersCard from '../assets/users.jpg';
+import CountriesCard from '../assets/countries.jpg';
 import Card from '@mui/material/Card';
 
 export const HomePage = () => {
