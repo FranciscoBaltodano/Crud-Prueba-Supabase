@@ -1,3 +1,3 @@
 Crud con Supabase
 Enlace:
-https://666c84c40c30bb08fb236948--glistening-licorice-5438b1.netlify.app/
+https://666cdd9140f54ef78720a0b1--silly-crostata-0be771.netlify.app/
