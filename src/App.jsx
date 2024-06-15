@@ -21,6 +21,7 @@ const App = () => {
           <AppTabs />
           <AppRouter />
 
+
       </AppTheme>
   );
 };

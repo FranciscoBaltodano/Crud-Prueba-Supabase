@@ -4,8 +4,12 @@ import { Box } from '@mui/material';
 import UsersCard from '../assets/users.jpg';
 import CountriesCard from '../assets/countries.jpg';
 import Card from '@mui/material/Card';
+import { useNavigate } from 'react-router-dom';
 
 export const HomePage = () => {
+
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -18,7 +22,7 @@ export const HomePage = () => {
         gap: '1rem',
       }}
     >
-      <Card className='notification'>
+      <Card className='notification' onClick={() => navigate('/countries')} >
           <div className="notiglow"></div>
           <div className="notiborderglow"></div>
           <div className="notititle">Crear Paises</div>
@@ -28,7 +32,7 @@ export const HomePage = () => {
           <div className="notibody">¡Ven y registra todos los países que conozcas!</div>
       </Card>
 
-      <Card className='notification'>
+      <Card className='notification' onClick={() => navigate('/users')}>
           <div className="notiglow"></div>
           <div className="notiborderglow"></div>
           <div className="notititle">Crear Usuarios</div>

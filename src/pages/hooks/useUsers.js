@@ -14,11 +14,13 @@ export function useUsers() {
     country: '',
   });
 
+  // Carga los datos de los países y los usuarios al cargar la pagina
   useEffect(() => {
     getCountries();
     getUsers();
   }, []);
 
+  // Me trae en un array los datos de los usuarios
   async function getUsers() {
     const { data, error } = await supabase.from("users").select();
     if (error) {
@@ -26,8 +28,9 @@ export function useUsers() {
     } else {
       setUsers(data);
     }
-  };
+  }
 
+  // Me trae en un array los datos de los países
   async function getCountries() {
     const { data, error } = await supabase.from("countries").select();
     if (error) {
@@ -35,9 +38,11 @@ export function useUsers() {
     } else {
       setCountries(data);
     }
-  };
+  }
 
+  // Crea un nuevo usuario, solo si tiene todos sus datos
   async function createUser(newUser) {
+    if (!newUser.name || !newUser.email || !newUser.country) return;
     const { data, error } = await supabase.from('users').insert([newUser]);
     if (error) {
       console.error('Error inserting user:', error.message);
@@ -45,8 +50,32 @@ export function useUsers() {
       console.log('User inserted:', data);
       getUsers();
     }
-  };
+  }
 
+  // Actualiza los datos de un usuario solo si tiene todos sus datos
+  async function updateUser(id, updatedUser) {
+    if (!updatedUser.name || !updatedUser.email || !updatedUser.country) return;
+    const { data, error } = await supabase.from('users').update(updatedUser).eq('id', id);
+    if (error) {
+      console.error('Error updating user:', error.message);
+    } else {
+      console.log('User updated:', data);
+      getUsers();
+    }
+  }
+
+  // Elimina un usuario
+  async function deleteUser(id) {
+    const { data, error } = await supabase.from('users').delete().eq('id', id);
+    if (error) {
+      console.error('Error deleting user:', error.message);
+    } else {
+      console.log('User deleted:', data);
+      getUsers();
+    }
+  }
+
+  // Actualiza el useState del user con el valor del input
   const handleChange = (event) => {
     setUser(user => ({
       ...user,
@@ -54,9 +83,10 @@ export function useUsers() {
     }));
   };
 
+  // Crea un nuevo usuario solo si todos lo inputs tienen datos
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Submitting user:', user);
+    if (!user.name || !user.email || !user.country) return;
     createUser(user);
     setUser({
       name: '',
@@ -71,6 +101,9 @@ export function useUsers() {
     user,
     handleChange,
     handleSubmit,
-    setUser
+    setUser,
+    updateUser,
+    deleteUser,
+    getUsers 
   };
 }
